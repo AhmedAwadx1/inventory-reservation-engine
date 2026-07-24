@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('inventory_movements', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
-            $table->string('idempotency_key')->unique();
+            $table->string('idempotency_key');
             $table->foreignId('product_id')->constrained();
             $table->foreignId('warehouse_id')->constrained();
             $table->foreignId('reservation_id')->nullable()->constrained()->nullOnDelete();
@@ -28,6 +28,7 @@ return new class extends Migration
 
             $table->index(['product_id', 'warehouse_id', 'created_at']);
             $table->index('type');
+            $table->unique(['idempotency_key', 'type']);
         });
     }
 

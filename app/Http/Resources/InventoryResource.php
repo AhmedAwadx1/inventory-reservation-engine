@@ -12,6 +12,7 @@ class InventoryResource extends JsonResource
         return [
             'id'                 => $this->id,
             'product_id'         => $this->product_id,
+            'product_name'       =>$this->whenLoaded('product.name'),
             'warehouse_id'       => $this->warehouse_id,
             'quantity_available'  => $this->quantity_available,
             'quantity_reserved'   => $this->quantity_reserved,

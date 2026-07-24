@@ -30,10 +30,10 @@ class InventoryRepository implements InventoryRepositoryInterface
         $inventory->decrement($column ,$quantity );
     }
     public function getByProduct(int $productId){
-        return Inventory::where('product_id' ,$productId )->with('warehouse')->get();
+        return Inventory::where('product_id' ,$productId )->with('warehouse','product')->get();
     }
     public function getByWarehouse(int $warehouseId){
-        return Inventory::where('warehouse_id' ,$warehouseId )->with('product')->get();
+        return Inventory::where('warehouse_id' ,$warehouseId )->with('product','warehouse')->get();
 
     }
 }
