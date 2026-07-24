@@ -1,8 +1,10 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\InventoryController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+Route::prefix('inventory')
+    ->middleware(\App\Http\Middleware\IdempotencyMiddleware::class)
+    ->group(function () {
+        Route::post('/add-stock', [InventoryController::class, 'addStock']);
+    });
